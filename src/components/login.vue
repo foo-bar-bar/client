@@ -65,6 +65,7 @@ export default {
       })
         .then(({ data })=> {
           this.$emit("checkLogin", false, false)
+          this.$emit('loginSuccess')
         })
         .catch(err => {
           console.log(err)

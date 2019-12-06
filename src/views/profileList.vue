@@ -5,60 +5,38 @@
          <ProfileCard v-for="(profileCard, i) in profileCards" :key="i" :profileCard="profileCards[i]"></ProfileCard>
       </div>
    </div>
-   </div>
 </template>
 
 <script>
-// import Navbar from '../components/navbar'
+import axios from '../../apis/server'
 import ProfileCard from '../components/card.vue'
-import axios from 'axios'
 
 export default {
    // props: [],
    data() {
       return {
-         profileCards: [
-            {
-               name: "Dedi Prakasa",
-               profileDescription: "Aku malu dan gak mau",
-               image: "../../assets/cat1.jpg"
-            },
-            {
-               name: "Daniel Evan",
-               profileDescription: "Aku malu malu lagi",
-               image: "../../assets/cat1.jpg"
-            },
-            {
-               name: "Dedi Prakasa",
-               profileDescription: "Aku malu dan gak mau",
-               image: "../../assets/cat1.jpg"
-            },
-            {
-               name: "Daniel Evan",
-               profileDescription: "Aku malu malu lagi",
-               image: "../../assets/cat1.jpg"
-            },
-            {
-               name: "Dedi Prakasa",
-               profileDescription: "Aku malu dan gak mau",
-               image: "../../assets/cat1.jpg"
-            },
-            {
-               name: "Daniel Evan",
-               profileDescription: "Aku malu malu lagi",
-               image: "../../assets/cat1.jpg"
-            },
-         ]
+         profileCards: [],
       }
    },
    components: {
-      Navbar,
       ProfileCard
    },
    methods: {
       fetchProfiles() {
-
+         axios({
+            url: `/profile`,
+            method: 'get',
+            headers: {
+               token: localStorage.getItem('token')
+            }
+         })
+         .then(({data}) => {
+            this.profileCards = data
+         })
       }
+   },
+   created() {
+      this.fetchProfiles()
    }
 }
 </script>

@@ -5,6 +5,7 @@
       :formLogin="formLogin"
       :formRegister="formRegister"
       @checkLogin="checkLogin"
+      @loginSuccess="loginSuccess"
     ></app-login>
     <app-register
       v-if="formRegister"
@@ -34,6 +35,10 @@ export default {
     checkLogin(login, register) {
       this.formLogin = login;
       this.formRegister = register
+    },
+    loginSuccess() {
+      console.log('di loginSuccess')
+      this.$emit('goToProfileList')
     }
   }
 }
