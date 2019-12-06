@@ -1,8 +1,15 @@
 <template>
+<<<<<<< HEAD
    <div id="profile-list" class="container-fluid mt-3 ml-4">
       <!-- <Navbar></Navbar> -->
       <div class="row" id="profile-cards-container">
          <ProfileCard @GoToProfilePage="GoToProfilePage" v-for="(profileCard, i) in profileCards" :key="i" :profileCard="profileCards[i]"></ProfileCard>
+=======
+   <div class="container-fluid ml-5" style="margin-top: 5rem;">
+      <div class="sharethis-inline-share-buttons"></div>
+      <div class="row profile-cards-container">
+         <ProfileCard v-for="(profileCard, i) in profileCards" :key="i" :profileCard="profileCards[i]"></ProfileCard>
+>>>>>>> preparing for merging
       </div>
    </div>
 </template>
@@ -46,12 +53,15 @@ export default {
 </script>
 
 <style>
+<<<<<<< HEAD
    /* #profile-list { */
       /* background-color: black; */
    /* } */
 
+=======
+>>>>>>> preparing for merging
    @media only screen and (max-width: 576px) {
-      #profile-cards-container {
+      .profile-cards-container {
          justify-content: center;
       }
    }
