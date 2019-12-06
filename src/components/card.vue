@@ -7,9 +7,15 @@
          <p class="card-text mx-auto">{{profileCard.age}}</p>
          <div class="justify-self text-center d-flex justify-around align-items-center">
             <a href="#" class="btn btn-primary text-center" @click.prevent="goToProfilePage(profileCard._id)">Cek profile!</a>
-            <div class="fb-share-button" 
-               v-bind:data-href="href"
-               data-layout="button_count">
+            <div class="sharer-wrapper d-flex flex-column justify-around align-items-center">
+               <div class="fb-share-button mb-1" 
+                  v-bind:data-href="href"
+                  data-layout="button_count">
+               </div>
+               <a class="twitter-share-button"
+                  v-bind:href="twitterHref">
+               Tweet
+               </a>
             </div>
          </div>
       </div>
@@ -27,13 +33,31 @@ import axios from '../../apis/server'
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
+window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));
+
 export default {
    props: ['profileCard'],
    data() {
       return {
          imageUrl: `background: url(\'${this.profileCard.image}\') no-repeat center center/cover;`,
          description: `Ayo cek profile ${this.profileCard.userId.name}!`,
-         href: `${this.profileCard.image}`
+         href: `${this.profileCard.image}`,
+         twitterHref: `https://twitter.com/intent/tweet?text=Ayo%20cek%20profile%20${this.profileCard.userId.name}%20${this.profileCard.image}`
       }
    },
    methods: {
