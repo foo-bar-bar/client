@@ -7,9 +7,8 @@
 
 
 <script>
-import BootstrapVue from 'bootstrap-vue';
-import Login from "./components/login";
-import Register from "./components/register"
+import Login from "../components/login";
+import Register from "../components/register"
 export default {
 components: {
     "app-login": Login,
