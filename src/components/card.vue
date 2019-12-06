@@ -25,6 +25,9 @@
 <script>
 import axios from '../../apis/server'
 
+import Swal from 'sweetalert2'
+
+
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
@@ -49,6 +52,7 @@ window.twttr = (function(d, s, id) {
 
   return t;
 }(document, "script", "twitter-wjs"));
+
 
 export default {
    props: ['profileCard'],
@@ -75,7 +79,11 @@ export default {
                this.$emit('GoToProfilePage',data)
          })
          .catch(err=>{
-            console.log(err);
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err
+          })
          })
       }
    }

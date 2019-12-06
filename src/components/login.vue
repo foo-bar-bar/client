@@ -43,6 +43,7 @@
 
 <script>
 import axios from "../../apis/server"
+import Swal from 'sweetalert2'
 
 export default {
   props: ["formLogin", "formRegister"],
@@ -68,9 +69,17 @@ export default {
           localStorage.setItem('name',data.name)
           this.$emit("checkLogin", false, false)
           this.$emit('loginSuccess')
+          Swal.fire({
+            icon: 'success',
+            text: "Successfully signed in!"
+          })
         })
         .catch(err => {
-          console.log(err)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "Invalid email/password!"
+          })
         })
     },
     checkLogin() {
