@@ -12,6 +12,7 @@ import ProfileList from './views/profileList'
 import Navbar from './views/Navbar'
 import ProfilePage from './views/ProfilePage'
 import LoginRegister from './views/login-register'
+
 export default {
     name : 'app',
     data(){
