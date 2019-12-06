@@ -2,7 +2,7 @@
   <div
       id="register"
       class="mt-5 container justify-content-center border rounded-sm bg-light p-0"
-      style="width:30%; height:85vh"
+      style="width:30%; "
     >
       <b-form id="register-form" class="p-3" v-on:submit.prevent="onSubmit">
         

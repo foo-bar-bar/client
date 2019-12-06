@@ -1,8 +1,8 @@
 <template>
   <div
       id="signin"
-      class="mt-5 container justify-content-center border rounded-sm bg-light p-0"
-      style="width:30%; height:85vh"
+      class="container justify-content-center border rounded-sm bg-light p-0"
+      style="width:30%; margin-top: 100px;"
     >
     <b-form id="signin-form" v-on:submit.prevent="onSubmit" class="p-3">
       <h1 class="h3 my-3 font-weight-normal text-center">Sign In</h1>
@@ -64,6 +64,8 @@ export default {
         }
       })
         .then(({ data })=> {
+          localStorage.setItem('token',data.token)
+          localStorage.setItem('name',data.name)
           this.$emit("checkLogin", false, false)
           this.$emit('loginSuccess')
         })

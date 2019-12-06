@@ -5,9 +5,9 @@
             <div class="container">
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container mt-5 text-center">
-                        <div class="rounded-circle mx-auto" style="height: 260px; border: 7px solid rgba(0, 0, 0, 0.473); width: 260px; background-color: brown; background-size:100%;"> </div>
+                        <div class="rounded-circle mx-auto" :style="imageStyle"> </div>
                         <div class="d-flex align-items-center justify-content-center">
-                            <span style="font-size: 40px; font-weight: bold;" >Name</span>
+                            <span style="font-size: 40px; font-weight: bold;" >{{dataUser.userId.name}}</span>
                         </div>
                         <div class="accordion" id="accordionExample">
                         <div class="container" style="width: 40em;">
@@ -18,9 +18,11 @@
                                         Details
                                     </button>
                                     <div class="ml-auto">
-                                        <button type="button" class="mt-1 btn btn-primary btn-sm">
+                                        <button type="button" @click.prevent="loveme(dataUser._id, dataUser.userId.name)" class="mt-1 btn btn-primary btn-sm">
                                             <i class="fas fa-heart"></i>
+                                            {{(dataUser.lovers.length)}}
                                         </button>
+                                        
                                         <button type="button" class="mr-1 mt-1 btn btn-primary btn-sm">
                                             <i class="fas fa-share    "></i>
                                         </button>   
@@ -32,16 +34,16 @@
                                     <div class="card ml-1" style="width: 100%; height: auto;">
                                         <div class="card-body pt-1">
                                             <h5 class="card-title mt-2"  style="font-size: 25px; font-weight: bold;"> Age </h5>
-                                            <button type="button" style="font-size: 15px;" class="btn btn-sm btn-primary px-5"> 90th </button>
+                                            <button type="button" style="font-size: 15px;" class="btn btn-sm btn-primary px-5"> {{dataUser.age}}th </button>
                                             <hr>
                                             <h5 class="card-title mt-2"  style="font-size: 25px; font-weight: bold;"> Multicultural </h5>
-                                            <button type="button" style="font-size: 15px;" class="btn btn-sm btn-primary px-5"> RAss </button>
+                                            <button type="button" style="font-size: 15px;" class="btn btn-sm btn-primary px-5"> {{dataUser.multicultural}} </button>
                                             <hr>
-                                            <h5 class="card-title mt-2"  style="font-size: 25px; font-weight: bold;"> Feminime </h5>
-                                            <button type="button" style="font-size: 15px;" class="btn btn-sm btn-secondary px-5"> lorem </button>
+                                            <h5 class="card-title mt-2"  style="font-size: 25px; font-weight: bold;"> Feminine </h5>
+                                            <button type="button" style="font-size: 15px;" class="btn btn-sm btn-secondary px-5"> {{Math.round(dataUser.feminine * 100)}}% </button>
                                             <hr>
                                             <h5 class="card-title mt-2"  style="font-size: 25px; font-weight: bold;"> Masculine </h5>
-                                            <button type="button" style="font-size: 15px;" class="btn btn-sm btn-secondary px-5"> RAss </button>
+                                            <button type="button" style="font-size: 15px;" class="btn btn-sm btn-secondary px-5"> {{Math.round(dataUser.masculine * 100)}}%</button>
                                         </div>
                                     </div>
                                 </div>
@@ -53,21 +55,12 @@
                             <i class="fas fa-info-circle    "></i>
                             More info rank
                         </p>
-                        <div class="row d-flex align-items-center justify-content-center">
-                            <div class="col-3 mr-4 mt-1">
+                        <div class="row d-flex">
+                            <div class="col-3 mt-1" v-for="data in dataUser.lovers" :key="data._id">
                                 <div class="card" style="width: 12rem;">
-                                    <div class="card-body pt-1">
-                                        <div class="rounded-circle mt-3 mx-auto mb-2" style="height: 130px; width: 130px; background-color: brown; background-size:100%;"> </div>
-                                        <p class="card-text mb-1" style="font-size: 20px; font-weight: bold;">Name</p>
-                                        <hr class="m-0 mb-1">
-                                        <p class="card-text mb-1" style="font-size: 13px;">Love Precentage</p>
-                                        <button type="button" class="btn btn-primary"> 78% </button>
-                                    </div>
-                                    <button type="button" class="btn btn-info btn-sm" style="margin-top: -5px;">
-                                        <i class="fas fa-share"></i>
-                                    </button> 
+                                    <profile-rank :data="data"></profile-rank>
                                 </div>
-                            </div>                                    
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -78,8 +71,39 @@
 </template>
 
 <script>
+import LoveRank from '../components/LoveRank'
+import axios from '../../apis/server'
 export default {
-
+    props : ['dataUser'],
+    data() {
+        return {
+            imageStyle : `height: 260px; border: 7px solid rgba(0, 0, 0, 0.473); width: 260px; background: url('${this.dataUser.image}') no-repeat center center/cover; background-size:100%`
+        }
+    },
+    methods: {
+        loveme(id,name){
+            axios({
+            method : 'patch',
+            url : `/profile/love/${id}`,
+            headers : {
+                'token' : localStorage.getItem('token')
+            },
+            data : {
+                fname : localStorage.getItem('name'),
+                sname : name
+            }
+            })
+            .then(({data})=>{
+                this.dataUser.lovers = data.profile.lovers
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        }
+    },
+    components :{
+        'profile-rank' : LoveRank
+    }
 }
 </script>
 
