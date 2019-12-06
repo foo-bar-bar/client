@@ -18,9 +18,13 @@
   },
   "homepage": "https://github.com/foo-bar-bar/client#readme",
   "dependencies": {
+    "axios": "^0.19.0",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.1.0",
+<<<<<<< HEAD
     "jquery": "^3.4.1",
+=======
+>>>>>>> d2a5f88f08f09ccd6bd52bd10ff315fa2e5e580a
     "vue": "^2.6.10",
     "vue-hot-reload-api": "^2.3.4"
   },

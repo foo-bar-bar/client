@@ -1,26 +1,30 @@
 <template>
   <div>
-    <app-login></app-login>
-    <app-register></app-register>
+      <app-navbar></app-navbar>
+      <app-profileList></app-profileList>
+      <app-profilePage></app-profilePage>
   </div>
 </template>
 
 <script>
-import BootstrapVue from 'bootstrap-vue';
-import Login from "./components/login";
-import Register from "./components/register"
-
-
-
+import ProfileList from './views/profileList'
+import Navbar from './views/Navbar'
+import ProfilePage from './views/ProfilePage'
 export default {
-  components: {
-    "app-login": Login,
-    "app-register": Register
-  }
+    name : 'app',
+    data(){
+        return {
+
+        }
+    },
+    components : {
+        'app-profilePage' : ProfilePage,
+        'app-navbar' : Navbar,
+        'app-profileList' : ProfileList
+    }
 }
 </script>
 
 
 <style>
-
 </style>
