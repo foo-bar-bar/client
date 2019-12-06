@@ -84,9 +84,17 @@ export default {
       })
         .then(({ data }) => {
           this.$emit("checkLogin", true, false)
+          Swal.fire({
+            icon: 'success',
+            text: "Successfully registered!"
+          })
         })
         .catch(err => {
-          console.log(err)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err
+          })
         })
     },
     checkLogin() {
