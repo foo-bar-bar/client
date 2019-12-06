@@ -2,7 +2,7 @@
    <div id="profile-list" class="container-fluid mt-3 ml-4">
       <!-- <Navbar></Navbar> -->
       <div class="row" id="profile-cards-container">
-         <ProfileCard v-for="(profileCard, i) in profileCards" :key="i" :profileCard="profileCards[i]"></ProfileCard>
+         <ProfileCard @GoToProfilePage="GoToProfilePage" v-for="(profileCard, i) in profileCards" :key="i" :profileCard="profileCards[i]"></ProfileCard>
       </div>
    </div>
 </template>
@@ -22,6 +22,10 @@ export default {
       ProfileCard
    },
    methods: {
+      GoToProfilePage(data){
+         console.log('parent');
+         this.$emit('gotoProfilPage',data)
+      },
       fetchProfiles() {
          axios({
             url: `/profile`,
@@ -42,9 +46,9 @@ export default {
 </script>
 
 <style>
-   #profile-list {
+   /* #profile-list { */
       /* background-color: black; */
-   }
+   /* } */
 
    @media only screen and (max-width: 576px) {
       #profile-cards-container {

@@ -1,9 +1,9 @@
 <template>
 <div>
-    <app-navbar @userLogout="userLogout"></app-navbar>
-    <app-loginRegister @goToProfileList="goToProfileList" v-if="!isLoggedIn"></app-loginRegister>
-    <app-profileList v-if="isLoggedIn"></app-profileList>
-    <app-profilePage v-if="isProfilePage"></app-profilePage>
+    <app-navbar @userLogout="userLogout" @backHome="backHome"></app-navbar>
+    <app-loginRegister @goToProfileList="goToProfileList" v-if="!isLoggedIn" v-show="isLogin"></app-loginRegister>
+    <app-profileList @gotoProfilPage="gotoProfilPage" v-if="isLoggedIn" ></app-profileList>
+    <app-profilePage  v-if="isProfilePage" :dataUser="dataUser"></app-profilePage>
 </div>
 </template>
 
@@ -16,8 +16,10 @@ export default {
     name : 'app',
     data(){
         return {
+            isLogin : false,
             isLoggedIn: false,
-            isProfilePage: false
+            isProfilePage: false,
+            dataUser : {}
         }
     },
     components : {
@@ -27,12 +29,26 @@ export default {
         'app-loginRegister': LoginRegister
     },
     methods: {
+        backHome(){
+            this.isProfilePage = false
+            this.isLoggedIn = true
+        },
         goToProfileList() {
             this.isLoggedIn = true
         },
+        gotoProfilPage(data) {
+            this.dataUser = data
+            this.isProfilePage = true
+            this.isLoggedIn = false
+            this.isLogin = false
+        },
         userLogout() {
             console.log('emit diterima')
-            this.isLoggedIn = false
+            this.isLoggedIn = false,
+            this.isLogin = true ,
+            this.isProfilePage= false
+            localStorage.removeItem('name')
+            localStorage.removeItem('token')
         }
     },
     created() {
