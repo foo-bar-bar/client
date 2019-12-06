@@ -1,6 +1,7 @@
 <template>
 <div>
     <app-navbar @userLogout="userLogout" @backHome="backHome"></app-navbar>
+    <!-- <app-uploadImage></app-uploadImage> -->
     <app-loginRegister @goToProfileList="goToProfileList" v-if="!isLoggedIn" v-show="isLogin"></app-loginRegister>
     <app-profileList @gotoProfilPage="gotoProfilPage" v-if="isLoggedIn" ></app-profileList>
     <app-profilePage  v-if="isProfilePage" :dataUser="dataUser"></app-profilePage>
@@ -12,6 +13,7 @@ import ProfileList from './views/profileList'
 import Navbar from './views/Navbar'
 import ProfilePage from './views/ProfilePage'
 import LoginRegister from './views/login-register'
+import UploadImage from './components/uploadImage'
 export default {
     name : 'app',
     data(){
@@ -26,7 +28,8 @@ export default {
         'app-profilePage' : ProfilePage,
         'app-navbar' : Navbar,
         'app-profileList' : ProfileList,
-        'app-loginRegister': LoginRegister
+        'app-loginRegister': LoginRegister,
+        'app-uploadImage': UploadImage
     },
     methods: {
         backHome(){

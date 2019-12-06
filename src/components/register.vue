@@ -60,6 +60,7 @@
 
 <script>
 import axios from "../../apis/server"
+import Swal from 'sweetalert2'
 
 export default {
   props: ["formLogin", "formRegister"],
@@ -83,11 +84,11 @@ export default {
         }
       })
         .then(({ data }) => {
-          this.$emit("checkLogin", true, false)
           Swal.fire({
             icon: 'success',
             text: "Successfully registered!"
           })
+          this.$emit("checkLogin", true, false)
         })
         .catch(err => {
           Swal.fire({

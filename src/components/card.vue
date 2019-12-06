@@ -16,6 +16,7 @@
 
 <script>
 import axios from '../../apis/server'
+import Swal from 'sweetalert2'
 export default {
    props: ['profileCard'],
    data() {
@@ -38,7 +39,11 @@ export default {
                this.$emit('GoToProfilePage',data)
          })
          .catch(err=>{
-            console.log(err);
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err
+          })
          })
       }
    }
