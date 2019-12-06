@@ -1,31 +1,59 @@
 <template>
-   <div class="mt-5">
-      <div id="profile-list" class="container">
-      <div class="row mt-5">
-         <profile-card
-            v-for="(profileCard, i) in profileCards" :key="i"
-            :profileCards="profileCards">
-         </profile-card>
+   <div id="profile-list" class="container-fluid mt-3 ml-4">
+      <!-- <Navbar></Navbar> -->
+      <div class="row" id="profile-cards-container">
+         <ProfileCard v-for="(profileCard, i) in profileCards" :key="i" :profileCard="profileCards[i]"></ProfileCard>
       </div>
    </div>
    </div>
 </template>
 
 <script>
-import ProfileCard from '../components/card'
+// import Navbar from '../components/navbar'
+import ProfileCard from '../components/card.vue'
 import axios from 'axios'
 
 export default {
    // props: [],
    data() {
       return {
-         profileCards: [{
-         text : ""
-      }]
+         profileCards: [
+            {
+               name: "Dedi Prakasa",
+               profileDescription: "Aku malu dan gak mau",
+               image: "../../assets/cat1.jpg"
+            },
+            {
+               name: "Daniel Evan",
+               profileDescription: "Aku malu malu lagi",
+               image: "../../assets/cat1.jpg"
+            },
+            {
+               name: "Dedi Prakasa",
+               profileDescription: "Aku malu dan gak mau",
+               image: "../../assets/cat1.jpg"
+            },
+            {
+               name: "Daniel Evan",
+               profileDescription: "Aku malu malu lagi",
+               image: "../../assets/cat1.jpg"
+            },
+            {
+               name: "Dedi Prakasa",
+               profileDescription: "Aku malu dan gak mau",
+               image: "../../assets/cat1.jpg"
+            },
+            {
+               name: "Daniel Evan",
+               profileDescription: "Aku malu malu lagi",
+               image: "../../assets/cat1.jpg"
+            },
+         ]
       }
    },
    components: {
-      'profile-card' : ProfileCard
+      Navbar,
+      ProfileCard
    },
    methods: {
       fetchProfiles() {
@@ -36,5 +64,13 @@ export default {
 </script>
 
 <style>
+   #profile-list {
+      /* background-color: black; */
+   }
 
+   @media only screen and (max-width: 576px) {
+      #profile-cards-container {
+         justify-content: center;
+      }
+   }
 </style>
