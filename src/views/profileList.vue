@@ -1,25 +1,31 @@
 <template>
-   <div id="profile-list" class="container mt-3">
-      <div class="row">
-         <ProfileCard v-for="(profileCard, i) in profileCards" :key="i" :profileCards="profileCards"></ProfileCard>
+   <div class="mt-5">
+      <div id="profile-list" class="container">
+      <div class="row mt-5">
+         <profile-card
+            v-for="(profileCard, i) in profileCards" :key="i"
+            :profileCards="profileCards">
+         </profile-card>
       </div>
    </div>
-  
+   </div>
 </template>
 
 <script>
-import ProfileCard from '../components/card.vue'
+import ProfileCard from '../components/card'
 import axios from 'axios'
 
 export default {
    // props: [],
-   data: {
-      profileCards: [{
-
+   data() {
+      return {
+         profileCards: [{
+         text : ""
       }]
+      }
    },
    components: {
-      ProfileCard
+      'profile-card' : ProfileCard
    },
    methods: {
       fetchProfiles() {
