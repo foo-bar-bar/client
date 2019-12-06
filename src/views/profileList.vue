@@ -1,13 +1,11 @@
 <template>
-   <div class="mt-5">
-      <div id="profile-list" class="container">
-      <div class="row mt-5">
+   <div class="row mt-5">
+      <div class="container mt-5 d-flex flex-row">
          <profile-card
             v-for="(profileCard, i) in profileCards" :key="i"
             :profileCards="profileCards">
          </profile-card>
       </div>
-   </div>
    </div>
 </template>
 

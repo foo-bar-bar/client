@@ -1,13 +1,22 @@
 <template>
    <div>
-      <div class="card" style="width: 18rem;">
-            <img src="../../assets/cat1.jpg" class="card-img-top border-bottom border-dark" alt="cat">
-            <div class="card-body">
-               <h5 class="card-title">Dedi Prakasa</h5>
-               <p class="card-text">Aku mencari wanita cantik yang bisa memberiku kehangatan.</p>
-               <a href="#" class="btn btn-primary">Cek profileku!</a>
-            </div>
+   <div class="card mr-3" style="width: 18rem;">
+      <img src="../../assets/cat1.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+         <h5 class="card-title" style="font-weight: bold;">Name</h5>
+         <p class="card-text">
+            Siapa saya
+         </p>
+         <div class="d-flex justify-content-center">
+            <a href="#" class="btn btn-sm btn-primary">
+               <i class="fas fa-sign-in-alt    "></i>
+               Profile
+            </a>
+            <a href="#" class="btn btn-sm btn-primary ml-2">
+               <i class="fas fa-heart"></i>
+            </a>
          </div>
+      </div>
    </div>
 </template>
 
