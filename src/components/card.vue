@@ -8,19 +8,38 @@
          <h5 class="card-title mx-auto">{{profileCard.userId.name}}</h5>
          <p class="card-text mx-auto">{{profileCard.age}}</p>
          <div class="justify-self text-center">
-
-            <a href="#" class="btn btn-primary text-center">Cek profile!</a>
+            <a href="#" class="btn btn-primary text-center" @click.prevent="goToProfilePage(profileCard._id)">Cek profile!</a>
          </div>
       </div>
    </div>
 </template>
 
 <script>
+import axios from '../../apis/server'
 export default {
    props: ['profileCard'],
    data() {
       return {
          imageUrl: `background: url(\'${this.profileCard.image}\') no-repeat center center/cover;`
+      }
+   },
+   methods: {
+      goToProfilePage(id){
+         axios({
+            method : 'get',
+            url : `/profile/${id}`,
+            headers : {
+               'token' : localStorage.getItem('token')
+            }
+         })
+         .then(({data})=>{
+            console.log(data);
+               console.log('cucu');
+               this.$emit('GoToProfilePage',data)
+         })
+         .catch(err=>{
+            console.log(err);
+         })
       }
    }
 }

@@ -5,15 +5,15 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand ml-5"  style="color: white;" href="#">
+            <a class="navbar-brand ml-5" @click="home" style="color: white;" href="#">
                 <i class="fas fa-heartbeat fa-2x" style="transform: rotate(-45deg);"></i>
                 <span style="margin-left: -13px; ;font-size: 30px; font-weight: bold; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"> LOVAPP </span>
             </a>
             <ul class="navbar-nav mx-auto">
-                <button type="button" class="ml-5 btn btn-light mr-5">
-                    <i class="fas fa-arrow-left    "></i>
-                    Back
-                </button>
+                <!-- <button type="button" class="ml-5 btn btn-light mr-5"> -->
+                    <!-- <i class="fas fa-arrow-left    "></i> -->
+                    <!-- Back -->
+                <!-- </button> -->
             </ul>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0"> </ul>
             <button type="button" class="btn btn-light mr-5" @click.prevent="logout">
@@ -29,8 +29,10 @@
 export default {
     methods: {
         logout() {
-            console.log('masuk logout')
             this.$emit('userLogout')
+        },
+        home(){
+            this.$emit('backHome')
         }
     }
 }
