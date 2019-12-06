@@ -33,7 +33,7 @@
       </b-form-group>
 
       <button class="btn btn-lg btn-primary btn-block btn-sm" type="submit">Sign In</button>
-      <p class="mt-2 text-center text-secondary">Don't have an account? <a href="#">Register</a></p>
+      <p class="mt-2 text-center text-secondary">Don't have an account? <a href="#" @click.prevent="checkLogin" >Register</a></p>
     </b-form>
     <div class="mx-0 copyright">
       <p class=" text-muted">&copy; 2019</p>
@@ -42,7 +42,10 @@
 </template>
 
 <script>
+import axios from "../../apis/server"
+
 export default {
+  props: ["formLogin", "formRegister"],
   name: "login",
   data () {
     return {
@@ -52,7 +55,28 @@ export default {
   },
   methods: {
     onSubmit() {
-      // console.log(this.email, this.password)
+      axios({
+        method: "post",
+        url: "/user/login",
+        data: {
+          email: this.email,
+          password: this.password
+        }
+      })
+        .then(({ data })=> {
+          this.$emit("checkLogin", false, false)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    checkLogin() {
+      if (this.formLogin) {
+        this.$emit("checkLogin", false, true);
+      } else {
+        this.$emit("checkLogin", true, false);
+      }
+      console.log(this.formLogin, this.formRegister)
     }
   }
 }

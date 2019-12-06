@@ -1,7 +1,17 @@
 <template>
   <div>
-    <app-login></app-login>
-    <app-register></app-register>
+    <app-login
+      v-if="formLogin"
+      :formLogin="formLogin"
+      :formRegister="formRegister"
+      @checkLogin="checkLogin"
+    ></app-login>
+    <app-register
+      v-if="formRegister"
+      :formLogin="formLogin"
+      :formRegister="formRegister"
+      @checkLogin="checkLogin"
+    ></app-register>
   </div>
 </template>
 
@@ -10,9 +20,21 @@
 import Login from "../components/login";
 import Register from "../components/register"
 export default {
-components: {
+  data() {
+    return {
+      formLogin: true,
+      formRegister: false,
+    }
+  },
+  components: {
     "app-login": Login,
     "app-register": Register
+  },
+  methods: {
+    checkLogin(login, register) {
+      this.formLogin = login;
+      this.formRegister = register
+    }
   }
 }
 </script>
