@@ -5,6 +5,7 @@
   </div>
 </template>
 
+
 <script>
 import BootstrapVue from 'bootstrap-vue';
 import Login from "./components/login";
