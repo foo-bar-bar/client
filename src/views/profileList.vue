@@ -42,9 +42,9 @@ export default {
 </script>
 
 <style>
-   #profile-list {
+   /* #profile-list { */
       /* background-color: black; */
-   }
+   /* } */
 
    @media only screen and (max-width: 576px) {
       #profile-cards-container {

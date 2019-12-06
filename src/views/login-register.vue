@@ -23,13 +23,8 @@ import Register from "../components/register"
 export default {
   data() {
     return {
-<<<<<<< HEAD
-      pagelogin : true,
-      pageregister : false
-=======
       formLogin: true,
       formRegister: false,
->>>>>>> development
     }
   },
   components: {
@@ -37,16 +32,6 @@ export default {
     "app-register": Register
   },
   methods: {
-<<<<<<< HEAD
-    checkLogin(){
-      if(this.pagelogin){
-        this.pagelogin = false
-        this.pageregister = true
-      } else {
-        this.pagelogin = true
-        this.pageregister = false
-      }
-=======
     checkLogin(login, register) {
       this.formLogin = login;
       this.formRegister = register
@@ -54,7 +39,6 @@ export default {
     loginSuccess() {
       console.log('di loginSuccess')
       this.$emit('goToProfileList')
->>>>>>> development
     }
   }
 }
