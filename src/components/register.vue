@@ -4,7 +4,7 @@
       class="mt-5 container justify-content-center border rounded-sm bg-light p-0"
       style="width:30%; "
     >
-      <b-form id="register-form" class="p-3">
+      <b-form id="register-form" class="p-3" v-on:submit.prevent="onSubmit">
         
         <h1 class="h3 my-3 font-weight-normal text-center">Register</h1>
 
@@ -40,7 +40,7 @@
         >
           <b-form-input
             id="reg-password"
-            type="text"
+            type="password"
             v-model="password"
             required
             placeholder="Enter your password"
@@ -50,7 +50,7 @@
 
         
           <button class="btn btn-lg btn-primary btn-block btn-sm" type="submit">Register</button>
-          <p class="mt-2 text-center text-secondary">Already have an account?<a href="#"> Sign in</a></p>
+          <p class="mt-2 text-center text-secondary">Already have an account?<a href="#" @click.prevent="checkLogin" > Sign in</a></p>
         </b-form>
         <div class="mx-0 copyright">
           <p class=" text-muted">&copy; 2019</p>
@@ -59,13 +59,42 @@
 </template>
 
 <script>
+import axios from "../../apis/server"
+
 export default {
+  props: ["formLogin", "formRegister"],
   name: "register",
   data () {
     return {
       name: "",
       email: "",
       password: "",
+    }
+  },
+  methods: {
+    onSubmit() {
+      axios({
+        method: "post",
+        url: "/user/register",
+        data: {
+          name: this.name,
+          email: this.email,
+          password: this.password
+        }
+      })
+        .then(({ data }) => {
+          this.$emit("checkLogin", true, false)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    checkLogin() {
+      if (this.formLogin) {
+        this.$emit("checkLogin", false, true);
+      } else {
+        this.$emit("checkLogin", true, false);
+      }
     }
   }
 }

@@ -16,7 +16,7 @@
                 </button>
             </ul>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0"> </ul>
-            <button type="button" class="btn btn-light mr-5" >
+            <button type="button" class="btn btn-light mr-5" @click.prevent="logout">
                 Logout
                 <i class="fas fa-sign-out-alt"></i>
             </button>
@@ -27,7 +27,12 @@
 
 <script>
 export default {
-
+    methods: {
+        logout() {
+            console.log('masuk logout')
+            this.$emit('userLogout')
+        }
+    }
 }
 </script>
 

@@ -1,9 +1,9 @@
 <template>
 <div>
-    <app-navbar></app-navbar>
-    <app-loginRegister></app-loginRegister>
-    <app-profileList></app-profileList>
-    <app-profilePage></app-profilePage>
+    <app-navbar @userLogout="userLogout"></app-navbar>
+    <app-loginRegister @goToProfileList="goToProfileList" v-if="!isLoggedIn"></app-loginRegister>
+    <app-profileList v-if="isLoggedIn"></app-profileList>
+    <app-profilePage v-if="isProfilePage"></app-profilePage>
 </div>
 </template>
 
@@ -16,7 +16,8 @@ export default {
     name : 'app',
     data(){
         return {
-
+            isLoggedIn: false,
+            isProfilePage: false
         }
     },
     components : {
@@ -24,6 +25,20 @@ export default {
         'app-navbar' : Navbar,
         'app-profileList' : ProfileList,
         'app-loginRegister': LoginRegister
+    },
+    methods: {
+        goToProfileList() {
+            this.isLoggedIn = true
+        },
+        userLogout() {
+            console.log('emit diterima')
+            this.isLoggedIn = false
+        }
+    },
+    created() {
+        if(localStorage.getItem('token') !== null) {
+            this.isLoggedIn = true
+        }
     }
 }
 </script>
